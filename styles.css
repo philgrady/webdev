@@ -1,0 +1,288 @@
+:root {
+  --bg: #071228;
+  --surface: #0f1d3a;
+  --surface-2: #f5f8ff;
+  --text: #0f1d3a;
+  --white: #ffffff;
+  --brand: #24c36a;
+  --brand-dark: #1a9d55;
+  --accent: #5fd4ff;
+  --muted: #5f6b87;
+  --shadow: 0 18px 40px rgba(7, 18, 40, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.6;
+}
+
+.container {
+  width: min(1120px, 92vw);
+  margin: 0 auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #e8edf7;
+}
+
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 0;
+}
+
+.brand {
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--bg);
+}
+
+.brand span {
+  color: var(--brand-dark);
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--brand);
+  color: var(--white);
+  padding: 0.75rem 1.1rem;
+  border-radius: 0.7rem;
+  text-decoration: none;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--brand-dark);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.btn-nav {
+  padding: 0.55rem 0.95rem;
+}
+
+.hero {
+  background: linear-gradient(125deg, #06122b, #143f6b 60%, #1e6ca3);
+  color: var(--white);
+  padding: 5rem 0 4rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  line-height: 1.15;
+  margin: 0.4rem 0 1rem;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.eyebrow {
+  letter-spacing: 0.03em;
+  opacity: 0.9;
+  font-weight: 600;
+}
+
+.lead {
+  max-width: 52ch;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 0.8rem;
+  margin: 1.35rem 0;
+}
+
+.trust-pills {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.95rem;
+}
+
+.social-proof-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+.social-proof-card h2 {
+  font-size: 1.15rem;
+}
+
+.proof-stat {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.8rem;
+}
+
+.proof-stat strong {
+  font-size: 1.5rem;
+}
+
+.social-strip {
+  background: #eaf6ff;
+  color: #11426d;
+  font-weight: 500;
+  padding: 0.65rem 0;
+}
+
+.social-strip a {
+  color: #11426d;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.section-alt {
+  background: var(--surface-2);
+}
+
+.cards,
+.product-grid,
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.card,
+.product,
+.reviews blockquote,
+.hook-box,
+.quote-form {
+  background: var(--white);
+  border-radius: 0.9rem;
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+.featured {
+  border: 2px solid #d7f8e5;
+}
+
+.badge {
+  display: inline-block;
+  background: #dff8ea;
+  color: #17643a;
+  padding: 0.25rem 0.55rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.tick-list {
+  padding-left: 1.2rem;
+}
+
+.cta {
+  background: linear-gradient(135deg, #082147, #153f71);
+  color: var(--white);
+}
+
+.quote-form {
+  color: var(--text);
+}
+
+.quote-form label {
+  display: block;
+  font-size: 0.92rem;
+  margin-bottom: 0.7rem;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.72rem;
+  margin-top: 0.3rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d5ddec;
+  font: inherit;
+}
+
+.site-footer {
+  background: var(--bg);
+  color: var(--white);
+  padding: 1.4rem 0;
+}
+
+.site-footer a {
+  color: #b8ddff;
+}
+
+.small {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+@media (max-width: 920px) {
+  nav {
+    display: none;
+  }
+
+  .hero-grid,
+  .cards,
+  .product-grid,
+  .reviews,
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-top: 3.5rem;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+  }
+}
