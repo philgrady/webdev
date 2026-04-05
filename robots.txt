@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.stourportsolarandev.co.uk/sitemap.xml
