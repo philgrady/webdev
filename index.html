@@ -185,14 +185,47 @@
               Tell us your requirements and we’ll provide a fast, practical quotation with manufacturing
               guidance where needed.
             </p>
+            <address>
+              <p><strong>3343 Limited</strong></p>
+              <p>Unit 8 - 10 Safe Harbour Industrial Estate, Moor Lane, Witton, Birmingham, B6 7AE</p>
+              <p><a href="tel:+443303501101">0330 350 1101</a></p>
+              <p><a href="mailto:info@3343.co.uk">info@3343.co.uk</a></p>
+              <p>Mon–Sat: 08:00–18:00</p>
+            </address>
           </div>
-          <address>
-            <p><strong>3343 Limited</strong></p>
-            <p>Unit 8 - 10 Safe Harbour Industrial Estate, Moor Lane, Witton, Birmingham, B6 7AE</p>
-            <p><a href="tel:+443303501101">0330 350 1101</a></p>
-            <p><a href="mailto:info@3343.co.uk">info@3343.co.uk</a></p>
-            <p>Mon–Sat: 08:00–18:00</p>
-          </address>
+
+          <form
+            class="panel quote-form"
+            name="quote-request"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+          >
+            <input type="hidden" name="form-name" value="quote-request" />
+            <p class="visually-hidden">
+              <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+            </p>
+            <h3>Request a Quick Quote</h3>
+            <label for="name">Name</label>
+            <input id="name" name="name" autocomplete="name" required />
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+
+            <label for="service">Service Needed</label>
+            <select id="service" name="service" required>
+              <option value="">Choose a service</option>
+              <option>Laser Cutting</option>
+              <option>CNC Folding & Rolling</option>
+              <option>Welding</option>
+              <option>Ventilation Fabrication</option>
+              <option>General Enquiry</option>
+            </select>
+
+            <label for="message">Project Details</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <button class="btn btn-primary" type="submit">Send via Netlify Form</button>
+          </form>
         </div>
       </section>
     </main>

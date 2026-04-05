@@ -216,6 +216,18 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .card p,
 .panel p,
 .muted {
@@ -274,6 +286,28 @@ address {
   border-radius: 0.85rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 1rem;
+}
+
+.quote-form {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.quote-form input,
+.quote-form select,
+.quote-form textarea {
+  width: 100%;
+  border-radius: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #0c1629;
+  color: var(--text);
+  padding: 0.6rem 0.7rem;
+}
+
+.quote-form label {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--muted);
 }
 
 .site-footer {
