@@ -1,0 +1,16 @@
+{
+  "name": "deltatec-modern-site",
+  "version": "1.0.0",
+  "description": "Modern, fast multi-page website for Deltatec commercial kitchen ventilation and ozone systems.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check netlify/functions/contact.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.15",
+    "twilio": "^5.4.2"
+  }
+}
