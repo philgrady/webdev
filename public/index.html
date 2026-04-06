@@ -9,15 +9,15 @@
   <link rel="stylesheet" href="/assets/styles.css" />
 </head>
 <body>
-  <div class="topbar"><div class="container"><span>Call 0330 350 2288</span><span>Email info@deltatec.co.uk</span></div></div>
-  <nav><div class="container"><strong>DELTATEC</strong><div class="menu"><a class="active" href="/">Home</a><a href="/solutions/recirculating-cooker-hood">Recirculating Hood</a><a href="/solutions/kitchen-energy-saving">Energy Saving</a><a href="/solutions/extractor-fan">Extractor Fan</a><a href="/solutions/commercial-kitchen-canopy">Kitchen Canopy</a><a href="/solutions/ozone-injection-systems">Ozone Injection</a><a href="#contact">Contact</a></div></div></nav>
+  <div class="topbar"><div class="container"><span>Call <span data-cms-key="contact.phone">0330 350 2288</span></span><span>Email <span data-cms-key="contact.email">info@deltatec.co.uk</span></span></div></div>
+  <nav><div class="container"><strong>DELTATEC</strong><div class="menu"><a class="active" href="/">Home</a><a href="/solutions/recirculating-cooker-hood">Recirculating Hood</a><a href="/solutions/kitchen-energy-saving">Energy Saving</a><a href="/solutions/extractor-fan">Extractor Fan</a><a href="/solutions/commercial-kitchen-canopy">Kitchen Canopy</a><a href="/solutions/ozone-injection-systems">Ozone Injection</a><a href="#contact">Contact</a></div><a href="/admin" style="font-size:.8rem;color:#9fb5e5">Easy CMS</a></div></nav>
 
   <header class="hero"><div class="container hero-grid">
     <div>
-      <span class="badge">Modern Ventilation Engineering</span>
-      <h1>Commercial kitchen extraction that protects performance, energy budgets and brand reputation.</h1>
-      <p class="subtitle">Deltatec combines DW172-ready design, intelligent monitoring and responsive support. The result: cleaner air, lower risk of downtime and dependable compliance for every project.</p>
-      <div class="cta"><a class="btn" href="#contact">Book a free project review</a><a class="btn secondary" href="/solutions/ozone-injection-systems">Explore ozone systems</a></div>
+      <span class="badge" data-cms-key="home.badge">Modern Ventilation Engineering</span>
+      <h1 data-cms-key="home.headline">Commercial kitchen extraction that protects performance, energy budgets and brand reputation.</h1>
+      <p class="subtitle" data-cms-key="home.subheadline">Deltatec combines DW172-ready design, intelligent monitoring and responsive support. The result: cleaner air, lower risk of downtime and dependable compliance for every project.</p>
+      <div class="cta"><a class="btn" href="#contact"><span data-cms-key="home.ctaPrimary">Book a free project review</span></a><a class="btn secondary" href="/solutions/ozone-injection-systems"><span data-cms-key="home.ctaSecondary">Explore ozone systems</span></a></div>
     </div>
     <aside class="card">
       <h3>Why teams choose Deltatec</h3>
@@ -44,7 +44,7 @@
   </div></div></section>
 
   <section class="section" id="contact"><div class="container grid-2">
-    <div class="card"><h2>Start your next project</h2><p class="subtitle">Send your brief and we’ll reply with an initial recommendation. When configured, this form sends an email and an instant Twilio SMS notification.</p></div>
+    <div class="card"><h2 data-cms-key="home.contactTitle">Start your next project</h2><p class="subtitle" data-cms-key="home.contactIntro">Send your brief and we’ll reply with an initial recommendation. When configured, this form sends an email and an instant Twilio SMS notification.</p></div>
     <form id="contact-form" class="card" aria-label="Contact form">
       <div class="grid-2"><div><label for="name">Name</label><input id="name" name="name" required /></div><div><label for="email">Email</label><input id="email" name="email" type="email" required /></div></div>
       <div class="grid-2"><div><label for="phone">Phone</label><input id="phone" name="phone" /></div><div><label for="projectType">Project type</label><select id="projectType" name="projectType"><option>New build</option><option>Refit</option><option>Maintenance</option><option>General enquiry</option></select></div></div>
@@ -54,7 +54,8 @@
     </form>
   </div></section>
 
-  <footer><div class="container">© 2026 Deltatec Ltd · Commercial Ventilation, Energy Monitoring & Ozone Injection Systems.</div></footer>
+  <footer><div class="container"><span data-cms-key="contact.footer">© 2026 Deltatec Ltd · Commercial Ventilation, Energy Monitoring & Ozone Injection Systems.</span></div></footer>
+  <script src="/assets/cms.js" defer></script>
   <script src="/assets/site.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Deltatec Easy CMS</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <strong>DELTATEC CMS</strong>
+      <div class="menu"><a href="/">Back to site</a></div>
+    </div>
+  </nav>
+
+  <main class="section">
+    <div class="container grid-2">
+      <section class="card">
+        <h1>Easy CMS editor</h1>
+        <p class="subtitle">Edit copy, save locally, and export JSON for version-controlled updates.</p>
+        <form id="cms-form">
+          <label>Homepage badge</label>
+          <input name="home.badge" />
+          <label>Homepage headline</label>
+          <textarea rows="3" name="home.headline"></textarea>
+          <label>Homepage subheadline</label>
+          <textarea rows="4" name="home.subheadline"></textarea>
+          <label>Primary CTA</label>
+          <input name="home.ctaPrimary" />
+          <label>Secondary CTA</label>
+          <input name="home.ctaSecondary" />
+          <label>Contact title</label>
+          <input name="home.contactTitle" />
+          <label>Contact intro</label>
+          <textarea rows="3" name="home.contactIntro"></textarea>
+          <label>Phone</label>
+          <input name="contact.phone" />
+          <label>Email</label>
+          <input name="contact.email" />
+          <label>Footer text</label>
+          <textarea rows="2" name="contact.footer"></textarea>
+          <div class="cta">
+            <button class="btn" type="submit">Save locally</button>
+            <button class="btn secondary" type="button" id="download-json">Download JSON</button>
+            <button class="btn secondary" type="button" id="clear-cms">Reset</button>
+          </div>
+        </form>
+        <p id="cms-output" class="success" aria-live="polite"></p>
+      </section>
+      <section class="card">
+        <h2>How this CMS works</h2>
+        <ul class="clean">
+          <li>Loads defaults from <code>/data/content.json</code>.</li>
+          <li>Saved edits are stored in browser local storage.</li>
+          <li>Download JSON and replace <code>public/data/content.json</code> to publish globally.</li>
+          <li>Use this for quick copy updates without touching HTML.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('cms-form');
+    const output = document.getElementById('cms-output');
+
+    function setDeep(target, path, value) {
+      const [root, key] = path.split('.');
+      target[root] = target[root] || {};
+      target[root][key] = value;
+    }
+
+    function getDeep(target, path) {
+      const [root, key] = path.split('.');
+      return target?.[root]?.[key] || '';
+    }
+
+    async function loadDefaults() {
+      const defaults = await fetch('/data/content.json').then((r) => r.json());
+      const local = JSON.parse(localStorage.getItem('deltatec-cms') || '{}');
+      const merged = {
+        ...defaults,
+        ...local,
+        home: { ...(defaults.home || {}), ...(local.home || {}) },
+        contact: { ...(defaults.contact || {}), ...(local.contact || {}) }
+      };
+      [...form.elements].forEach((el) => {
+        if (el.name) el.value = getDeep(merged, el.name);
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = {};
+      const formData = new FormData(form);
+      formData.forEach((value, key) => setDeep(data, key, String(value)));
+      localStorage.setItem('deltatec-cms', JSON.stringify(data));
+      output.textContent = 'Saved locally. Open the homepage to preview changes.';
+      output.className = 'success';
+    });
+
+    document.getElementById('download-json').addEventListener('click', () => {
+      const payload = localStorage.getItem('deltatec-cms') || '{}';
+      const blob = new Blob([payload], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'deltatec-content.override.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('clear-cms').addEventListener('click', () => {
+      localStorage.removeItem('deltatec-cms');
+      output.textContent = 'Local CMS override cleared.';
+      output.className = 'success';
+      loadDefaults();
+    });
+
+    loadDefaults();
+  </script>
+</body>
+</html>

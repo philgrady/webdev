@@ -1,0 +1,16 @@
+{
+  "home": {
+    "badge": "Modern Ventilation Engineering",
+    "headline": "Commercial kitchen extraction that protects performance, energy budgets and brand reputation.",
+    "subheadline": "Deltatec combines DW172-ready design, intelligent monitoring and responsive support. The result: cleaner air, lower risk of downtime and dependable compliance for every project.",
+    "ctaPrimary": "Book a free project review",
+    "ctaSecondary": "Explore ozone systems",
+    "contactTitle": "Start your next project",
+    "contactIntro": "Send your brief and we’ll reply with an initial recommendation. When configured, this form sends an email and an instant Twilio SMS notification."
+  },
+  "contact": {
+    "phone": "0330 350 2288",
+    "email": "info@deltatec.co.uk",
+    "footer": "© 2026 Deltatec Ltd · Commercial Ventilation, Energy Monitoring & Ozone Injection Systems."
+  }
+}
