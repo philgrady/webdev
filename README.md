@@ -32,11 +32,12 @@ Add all variables from `.env.example` to **Netlify Site Settings → Environment
 
 ## Easy CMS abilities
 
-A lightweight no-build CMS is included:
+A lightweight no-build CMS is included (now password protected and page-aware):
 
-- Visit `/admin` to edit key homepage/contact copy.
+- Visit `/admin` and unlock with the CMS password.
 - Click **Save locally** to preview changes immediately in your browser.
 - Click **Download JSON** to export content updates.
 - Replace `public/data/content.json` with your exported JSON and redeploy to publish globally.
+- Update `admin.passwordHash` in `public/data/content.json` to change the CMS password.
 
-This gives non-technical teams simple content updates without editing HTML files.
+This gives non-technical teams simple content updates without editing HTML files, including per-page title/intro/CTA attributes for each solution page.

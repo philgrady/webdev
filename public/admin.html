@@ -15,47 +15,70 @@
   </nav>
 
   <main class="section">
-    <div class="container grid-2">
-      <section class="card">
-        <h1>Easy CMS editor</h1>
-        <p class="subtitle">Edit copy, save locally, and export JSON for version-controlled updates.</p>
-        <form id="cms-form">
-          <label>Homepage badge</label>
-          <input name="home.badge" />
-          <label>Homepage headline</label>
-          <textarea rows="3" name="home.headline"></textarea>
-          <label>Homepage subheadline</label>
-          <textarea rows="4" name="home.subheadline"></textarea>
-          <label>Primary CTA</label>
-          <input name="home.ctaPrimary" />
-          <label>Secondary CTA</label>
-          <input name="home.ctaSecondary" />
-          <label>Contact title</label>
-          <input name="home.contactTitle" />
-          <label>Contact intro</label>
-          <textarea rows="3" name="home.contactIntro"></textarea>
-          <label>Phone</label>
-          <input name="contact.phone" />
-          <label>Email</label>
-          <input name="contact.email" />
-          <label>Footer text</label>
-          <textarea rows="2" name="contact.footer"></textarea>
-          <div class="cta">
-            <button class="btn" type="submit">Save locally</button>
-            <button class="btn secondary" type="button" id="download-json">Download JSON</button>
-            <button class="btn secondary" type="button" id="clear-cms">Reset</button>
-          </div>
-        </form>
-        <p id="cms-output" class="success" aria-live="polite"></p>
+    <div class="container">
+      <section class="card" id="login-card">
+        <h1>CMS Login</h1>
+        <p class="subtitle">This editor is password protected.</p>
+        <label for="cms-password">Password</label>
+        <input id="cms-password" type="password" />
+        <div class="cta"><button class="btn" id="unlock-btn" type="button">Unlock CMS</button></div>
+        <p id="login-output" class="error" aria-live="polite"></p>
       </section>
-      <section class="card">
-        <h2>How this CMS works</h2>
-        <ul class="clean">
-          <li>Loads defaults from <code>/data/content.json</code>.</li>
-          <li>Saved edits are stored in browser local storage.</li>
-          <li>Download JSON and replace <code>public/data/content.json</code> to publish globally.</li>
-          <li>Use this for quick copy updates without touching HTML.</li>
-        </ul>
+
+      <section class="grid-2" id="cms-panel" style="display:none; margin-top:1rem;">
+        <section class="card">
+          <h2>Core site copy</h2>
+          <form id="cms-form">
+            <label>Homepage badge</label><input name="home.badge" />
+            <label>Homepage headline</label><textarea rows="3" name="home.headline"></textarea>
+            <label>Homepage subheadline</label><textarea rows="4" name="home.subheadline"></textarea>
+            <label>Primary CTA</label><input name="home.ctaPrimary" />
+            <label>Secondary CTA</label><input name="home.ctaSecondary" />
+            <label>Contact title</label><input name="home.contactTitle" />
+            <label>Contact intro</label><textarea rows="3" name="home.contactIntro"></textarea>
+            <label>Phone</label><input name="contact.phone" />
+            <label>Email</label><input name="contact.email" />
+            <label>Footer text</label><textarea rows="2" name="contact.footer"></textarea>
+
+            <h3>Per-page attributes</h3>
+            <label>Recirculating title</label><input name="pages.recirculating.heroTitle" />
+            <label>Recirculating intro</label><textarea rows="3" name="pages.recirculating.heroIntro"></textarea>
+            <label>Recirculating CTA</label><input name="pages.recirculating.ctaLabel" />
+
+            <label>Energy title</label><input name="pages.energy.heroTitle" />
+            <label>Energy intro</label><textarea rows="3" name="pages.energy.heroIntro"></textarea>
+            <label>Energy CTA</label><input name="pages.energy.ctaLabel" />
+
+            <label>Extractor title</label><input name="pages.extractor.heroTitle" />
+            <label>Extractor intro</label><textarea rows="3" name="pages.extractor.heroIntro"></textarea>
+            <label>Extractor CTA</label><input name="pages.extractor.ctaLabel" />
+
+            <label>Canopy title</label><input name="pages.canopy.heroTitle" />
+            <label>Canopy intro</label><textarea rows="3" name="pages.canopy.heroIntro"></textarea>
+            <label>Canopy CTA</label><input name="pages.canopy.ctaLabel" />
+
+            <label>Ozone title</label><input name="pages.ozone.heroTitle" />
+            <label>Ozone intro</label><textarea rows="3" name="pages.ozone.heroIntro"></textarea>
+            <label>Ozone CTA</label><input name="pages.ozone.ctaLabel" />
+
+            <div class="cta">
+              <button class="btn" type="submit">Save locally</button>
+              <button class="btn secondary" type="button" id="download-json">Download JSON</button>
+              <button class="btn secondary" type="button" id="clear-cms">Reset</button>
+            </div>
+          </form>
+          <p id="cms-output" class="success" aria-live="polite"></p>
+        </section>
+
+        <section class="card">
+          <h2>How to publish</h2>
+          <ul class="clean">
+            <li>Edit fields and click <strong>Save locally</strong> to preview instantly.</li>
+            <li>Click <strong>Download JSON</strong>.</li>
+            <li>Replace <code>public/data/content.json</code> with the exported file and redeploy.</li>
+            <li>Update <code>admin.passwordHash</code> before production roll-out.</li>
+          </ul>
+        </section>
       </section>
     </div>
   </main>
@@ -63,31 +86,65 @@
   <script>
     const form = document.getElementById('cms-form');
     const output = document.getElementById('cms-output');
+    const loginOutput = document.getElementById('login-output');
+    const panel = document.getElementById('cms-panel');
+    let defaults = {};
 
     function setDeep(target, path, value) {
-      const [root, key] = path.split('.');
-      target[root] = target[root] || {};
-      target[root][key] = value;
+      const keys = path.split('.');
+      let ref = target;
+      while (keys.length > 1) {
+        const key = keys.shift();
+        ref[key] = ref[key] || {};
+        ref = ref[key];
+      }
+      ref[keys[0]] = value;
     }
 
     function getDeep(target, path) {
-      const [root, key] = path.split('.');
-      return target?.[root]?.[key] || '';
+      return path.split('.').reduce((acc, key) => (acc ? acc[key] : undefined), target);
     }
 
-    async function loadDefaults() {
-      const defaults = await fetch('/data/content.json').then((r) => r.json());
-      const local = JSON.parse(localStorage.getItem('deltatec-cms') || '{}');
-      const merged = {
-        ...defaults,
-        ...local,
-        home: { ...(defaults.home || {}), ...(local.home || {}) },
-        contact: { ...(defaults.contact || {}), ...(local.contact || {}) }
-      };
+    function deepMerge(base = {}, override = {}) {
+      const merged = { ...base };
+      Object.entries(override).forEach(([k, v]) => {
+        if (v && typeof v === 'object' && !Array.isArray(v)) merged[k] = deepMerge(base[k] || {}, v);
+        else merged[k] = v;
+      });
+      return merged;
+    }
+
+    async function sha256(text) {
+      const data = new TextEncoder().encode(text);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function hydrateForm(content) {
       [...form.elements].forEach((el) => {
-        if (el.name) el.value = getDeep(merged, el.name);
+        if (el.name) el.value = getDeep(content, el.name) || '';
       });
     }
+
+    async function init() {
+      defaults = await fetch('/data/content.json').then((r) => r.json());
+      loginOutput.textContent = defaults.admin?.passwordHint || '';
+      const local = JSON.parse(localStorage.getItem('deltatec-cms') || '{}');
+      hydrateForm(deepMerge(defaults, local));
+    }
+
+    document.getElementById('unlock-btn').addEventListener('click', async () => {
+      const password = document.getElementById('cms-password').value || '';
+      const hashed = await sha256(password);
+      if (hashed !== defaults.admin?.passwordHash) {
+        loginOutput.textContent = 'Incorrect password.';
+        loginOutput.className = 'error';
+        return;
+      }
+      document.getElementById('login-card').style.display = 'none';
+      panel.style.display = 'grid';
+    });
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -95,29 +152,30 @@
       const formData = new FormData(form);
       formData.forEach((value, key) => setDeep(data, key, String(value)));
       localStorage.setItem('deltatec-cms', JSON.stringify(data));
-      output.textContent = 'Saved locally. Open the homepage to preview changes.';
+      output.textContent = 'Saved locally. Open the site pages to preview.';
       output.className = 'success';
     });
 
     document.getElementById('download-json').addEventListener('click', () => {
-      const payload = localStorage.getItem('deltatec-cms') || '{}';
-      const blob = new Blob([payload], { type: 'application/json' });
+      const base = JSON.parse(localStorage.getItem('deltatec-cms') || '{}');
+      const exported = deepMerge(defaults, base);
+      const blob = new Blob([JSON.stringify(exported, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'deltatec-content.override.json';
+      a.download = 'content.json';
       a.click();
       URL.revokeObjectURL(url);
     });
 
     document.getElementById('clear-cms').addEventListener('click', () => {
       localStorage.removeItem('deltatec-cms');
+      hydrateForm(defaults);
       output.textContent = 'Local CMS override cleared.';
       output.className = 'success';
-      loadDefaults();
     });
 
-    loadDefaults();
+    init();
   </script>
 </body>
 </html>

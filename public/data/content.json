@@ -1,4 +1,8 @@
 {
+  "admin": {
+    "passwordHash": "9dbe800c140f13ac57ff13e86eee0f9ab10304217ed6a2ac9ef586a2efec86e3",
+    "passwordHint": "Default password is deltatec2026! (change this hash before production)."
+  },
   "home": {
     "badge": "Modern Ventilation Engineering",
     "headline": "Commercial kitchen extraction that protects performance, energy budgets and brand reputation.",
@@ -12,5 +16,32 @@
     "phone": "0330 350 2288",
     "email": "info@deltatec.co.uk",
     "footer": "© 2026 Deltatec Ltd · Commercial Ventilation, Energy Monitoring & Ozone Injection Systems."
+  },
+  "pages": {
+    "recirculating": {
+      "heroTitle": "Commercial Recirculating Cooker Hoods",
+      "heroIntro": "Ideal where direct external discharge is challenging. Deltatec configures multi-stage filtration and airflow balancing to support cleaner indoor operation.",
+      "ctaLabel": "Discuss your layout"
+    },
+    "energy": {
+      "heroTitle": "Kitchen Energy Saving",
+      "heroIntro": "Rebuilt from the original energy-monitoring concept with modern UX, this service focuses on variable speed extraction, telemetry and alert-led maintenance.",
+      "ctaLabel": "Request an energy audit"
+    },
+    "extractor": {
+      "heroTitle": "Commercial Extractor Fan Systems",
+      "heroIntro": "Designed for high pressure drops, grease-heavy duty cycles and acoustic sensitivity. We match fan curves to the full worst-case system condition.",
+      "ctaLabel": "Specify your fan package"
+    },
+    "canopy": {
+      "heroTitle": "Commercial Kitchen Canopy Systems",
+      "heroIntro": "Canopy designs engineered for robust plume capture, practical cleaning access and integration with control and monitoring systems.",
+      "ctaLabel": "Plan a canopy project"
+    },
+    "ozone": {
+      "heroTitle": "Ozone Injection Systems",
+      "heroIntro": "Deltatec ozone injection systems are engineered as controlled treatment stages to support odour management and microbial load reduction within suitable ventilation strategies.",
+      "ctaLabel": "Review ozone suitability"
+    }
   }
 }
